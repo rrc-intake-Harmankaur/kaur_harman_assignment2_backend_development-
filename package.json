@@ -1,0 +1,32 @@
+{
+  "name": "kaur_harman_assignment2_backend_development-",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rrc-intake-Harmankaur/kaur_harman_assignment2_backend_development-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rrc-intake-Harmankaur/kaur_harman_assignment2_backend_development-/issues"
+  },
+  "homepage": "https://github.com/rrc-intake-Harmankaur/kaur_harman_assignment2_backend_development-#readme",
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^25.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "morgan": "^1.10.1"
+  }
+}
