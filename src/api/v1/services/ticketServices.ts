@@ -30,3 +30,37 @@ export const calculateUrgency = (ticket: Ticket): string => {
     return "LOW";
 };
 
+export const getAllTickets = (): Ticket[] => structuredClone(tickets);
+
+export const getTicketById = (id: string): Ticket | undefined =>
+    tickets.find(t => t.id === id);
+
+export const createTicket = (
+    data: Omit<Ticket, "id" | "status" | "createdAt">
+): Ticket => {
+    const ticket: Ticket = {
+        id: Date.now().toString(),
+        ...data,
+        status: "open",
+        createdAt: new Date(),
+    };
+    tickets.push(ticket);
+    return ticket;
+};
+
+export const updateTicket = (
+    id: string,
+    updates: Partial<Ticket>
+): Ticket | undefined => {
+    const ticket = tickets.find(t => t.id === id);
+    if (!ticket) return undefined;
+    Object.assign(ticket, updates);
+    return ticket;
+};
+
+export const deleteTicket = (id: string): boolean => {
+    const index = tickets.findIndex(t => t.id === id);
+    if (index === -1) return false;
+    tickets.splice(index, 1);
+    return true;
+};
