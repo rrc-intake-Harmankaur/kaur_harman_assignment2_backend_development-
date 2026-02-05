@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
+    "scripts": {
+    "start": "ts-node src/server.ts",
+    "dev": "ts-node src/server.ts",
+    "test": "jest"
+    },
+    "repository": {
     "type": "git",
     "url": "git+https://github.com/rrc-intake-Harmankaur/kaur_harman_assignment2_backend_development-.git"
   },
