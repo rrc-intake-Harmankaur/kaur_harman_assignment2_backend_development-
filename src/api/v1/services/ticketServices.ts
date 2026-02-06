@@ -7,36 +7,101 @@ export interface Ticket {
     createdAt: Date;
 }
 
-export const tickets: Ticket[] = [];
+const daysAgo = (days: number): Date => {
+  return new Date(Date.now() - days * 24 * 60 * 60 * 1000);
+};
 
-export const calculateUrgency = (ticket: Ticket): string => {
-    if (ticket.status === "resolved") {
-        return "Resolved. No further action required.";
-    }
+export const tickets: Ticket[] = [
+  {
+    id: "1",
+    title: "Update footer copyright year",
+    description: "Footer still shows 2024",
+    priority: "low",
+    status: "open",
+    createdAt: daysAgo(3),
+  },
+  {
+    id: "2",
+    title: "Profile picture upload slow",
+    description: "Upload takes 30+ seconds",
+    priority: "medium",
+    status: "open",
+    createdAt:  daysAgo(3),
+  },
+  {
+    id: "3",
+    title: "Dashboard loading slowly",
+    description: "Dashboard takes 10+ seconds to load",
+    priority: "medium",
+    status: "open",
+    createdAt: daysAgo(6),
+  },
+  {
+    id: "4",
+    title: "Password reset email delayed",
+    description: "Reset emails taking over 30 minutes",
+    priority: "high",
+    status: "open",
+    createdAt: daysAgo(7),
+  },
+  {
+    id: "5",
+    title: "Export to PDF not working",
+    description: "PDF export fails silently",
+    priority: "high",
+    status: "open",
+    createdAt: daysAgo(8),
+  },
+  {
+    id: "6",
+    title: "Login page not loading",
+    description: "Users report blank screen on login",
+    priority: "critical",
+    status: "open",
+    createdAt: daysAgo(1),
+  },
+  {
+    id: "7",
+    title: "Dark mode toggle",
+    description: "Dark mode doesn't persist",
+    priority: "medium",
+    status: "resolved",
+    createdAt: daysAgo(5),
+  }
+];
+
+export const calculateUrgency = (ticket: Ticket): any => {
 
     const baseScores = {
-        critical: 50,
-        high: 30,
-        medium: 20,
-        low: 10,
+      critical: 50,
+      high: 30,
+      medium: 20,
+      low: 10,
     };
 
-    const ageInDays = 
+    const ticketAge =
     (Date.now() - ticket.createdAt.getTime()) / (1000 * 60 * 60 * 24);
 
-    const urgencyScore = baseScores[ticket.priority] + ageInDays * 5;
+    const urgencyScore = baseScores[ticket.priority] + ticketAge * 5;
 
-    const UrgencyLevel = 
-        urgencyScore <= 25
-        ? "Low urgency. Address when capacity allows."
-        : urgencyScore <= 35
-        ? "Moderate. Schedule for attention."
-        :urgencyScore <=45
-        ? "High urgency. Prioritize resolution."
-        : "Critical. Immediately attention required.";
+    const urgencyLevel =
+    ticket.status === "resolved"
+    ? "Resolved. No further action required"
+    :urgencyScore <= 25
+    ? "Low urgency. Address when capacity allows."
+    : urgencyScore <= 35
+    ? "Moderate. Schedule for attention."
+    : urgencyScore <= 45
+    ? "High urgency. Prioritize resolution."
+    : "Critical. Immediately attention required.";
 
-        return UrgencyLevel;
-};
+    return {
+        ...ticket, 
+        ticketAge,
+        urgencyScore,
+        urgencyLevel,
+    };
+  };
 
 export const getAllTickets = (): Ticket[] => structuredClone(tickets);
 

@@ -49,11 +49,19 @@ Response => {
     if (!deleted) 
         return res .status(HTTP_STATUS.NOT_FOUND) .json({ message: "Ticket not found" }); 
     return res.status(HTTP_STATUS.OK).json({ message: "Ticket deleted" }); }; 
-    export const getTicketUrgency = (req: Request, res: Response): 
-    Response => { 
-        const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id; 
-        const ticket = ticketService.getTicketById(id); 
-        if (!ticket) 
-            return res .status(HTTP_STATUS.NOT_FOUND) .json({ message: "Ticket not found" }); 
-        const urgency = ticketService.calculateUrgency(ticket); 
-        return res.status(HTTP_STATUS.OK).json({ ...ticket, urgency });}
+   
+export const getTicketUrgency = (req: Request, res: Response): Response => {
+  const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+
+  const ticket = ticketService.getTicketById(id);
+  if (!ticket) {
+    return res.status(HTTP_STATUS.NOT_FOUND).json({ message: "Ticket not found" });
+  }
+
+  const result = ticketService.calculateUrgency(ticket);
+
+  return res.status(HTTP_STATUS.OK).json({
+    message: "Ticket urgency calculated",
+    data: result,
+  });
+};

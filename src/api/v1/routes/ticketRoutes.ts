@@ -5,7 +5,11 @@ const router = Router();
 
 // Health check
 router.get("/health", (req, res) => {
-  res.status(200).json({ status: "OK" });
+  res.status(200).json({ status: "OK",
+    uptime: process.uptime(),
+    timeStamp: new Date().toISOString(),
+    version: "1.0.0",
+  });
 });
 
 // CRUD
