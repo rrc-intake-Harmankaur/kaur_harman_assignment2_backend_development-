@@ -50,7 +50,7 @@ export const tickets: Ticket[] = [
     description: "PDF export fails silently",
     priority: "high",
     status: "open",
-    createdAt: daysAgo(8),
+    createdAt: daysAgo(2),
   },
   {
     id: "6",
