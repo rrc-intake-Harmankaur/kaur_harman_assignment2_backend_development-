@@ -10,7 +10,9 @@ export interface Ticket {
 export const tickets: Ticket[] = [];
 
 export const calculateUrgency = (ticket: Ticket): string => {
-    if (ticket.status === "resolved") return "RESOLVED";
+    if (ticket.status === "resolved") {
+        return "Resolved. No further action required.";
+    }
 
     const baseScores = {
         critical: 50,
@@ -24,10 +26,16 @@ export const calculateUrgency = (ticket: Ticket): string => {
 
     const urgencyScore = baseScores[ticket.priority] + ageInDays * 5;
 
-    if (urgencyScore >= 80) return "CRITICAL";
-    if (urgencyScore >= 60) return "HIGH";
-    if (urgencyScore >= 40) return "MEDIUM";
-    return "LOW";
+    const UrgencyLevel = 
+        urgencyScore <= 25
+        ? "Low urgency. Address when capacity allows."
+        : urgencyScore <= 35
+        ? "Moderate. Schedule for attention."
+        :urgencyScore <=45
+        ? "High urgency. Prioritize resolution."
+        : "Critical. Immediately attention required.";
+
+        return UrgencyLevel;
 };
 
 export const getAllTickets = (): Ticket[] => structuredClone(tickets);

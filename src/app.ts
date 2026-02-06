@@ -7,6 +7,6 @@ const app: Express = express();
 app.use(express.json());
 app.use(morgan("combined"));
 
-app.use("/api/vi", ticketRoutes);
+app.use("/api/v1", ticketRoutes);
 
 export default app;
